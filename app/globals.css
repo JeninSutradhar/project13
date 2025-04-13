@@ -1,0 +1,374 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 263 90% 51%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 4% 16%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 263 90% 51%;
+    --radius: 0.5rem;
+    --accent-glow: 160 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    font-family: 'JetBrains Mono', monospace;
+    @apply bg-background text-foreground;
+    background: linear-gradient(to bottom, #000000, #0A0A0A);
+    min-height: 100vh;
+  }
+}
+
+.glitch-text {
+  position: relative;
+  animation: glitch-skew 1s infinite linear alternate-reverse;
+  font-weight: 700; /* Bold like Tailwind's font-bold */
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+}
+
+.glitch-text::before {
+  color: #ff00c1;
+  z-index: -1;
+  animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  color: #00fff9;
+  z-index: -2;
+  animation: glitch-anim2 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-skew {
+  0% {
+    transform: skew(0deg);
+  }
+  10% {
+    transform: skew(3deg);
+  }
+  20% {
+    transform: skew(-2deg);
+  }
+  30%, 100% {
+    transform: skew(0deg);
+  }
+}
+
+@keyframes glitch-anim {
+  0% {
+    clip: rect(0, 9999px, 5px, 0);
+    transform: translate(1px, -1px);
+  }
+  10% {
+    clip: rect(6px, 9999px, 12px, 0);
+    transform: translate(-1px, 1px);
+  }
+  20% {
+    clip: rect(3px, 9999px, 9px, 0);
+    transform: translate(2px, -1px);
+  }
+  30% {
+    clip: rect(4px, 9999px, 10px, 0);
+    transform: translate(-2px, 1px);
+  }
+  100% {
+    clip: rect(1px, 9999px, 6px, 0);
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes glitch-anim2 {
+  0% {
+    clip: rect(2px, 9999px, 7px, 0);
+    transform: translate(-1px, 2px);
+  }
+  15% {
+    clip: rect(5px, 9999px, 11px, 0);
+    transform: translate(2px, -1px);
+  }
+  25% {
+    clip: rect(3px, 9999px, 8px, 0);
+    transform: translate(-2px, 1px);
+  }
+  40% {
+    clip: rect(4px, 9999px, 9px, 0);
+    transform: translate(1px, -2px);
+  }
+  100% {
+    clip: rect(1px, 9999px, 6px, 0);
+    transform: translate(0, 0);
+  }
+}
+
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#7D00FF] to-[#00BFFF];
+  animation: gradient-shift 8s ease infinite;
+  background-size: 200% auto;
+}
+
+.glass-card {
+  @apply bg-black/30 backdrop-blur-md border border-white/10 rounded-lg transition-all duration-300;
+}
+
+.glass-card:hover {
+  border-image: linear-gradient(45deg, hsl(var(--primary)), hsl(var(--accent-glow))) 1;
+  box-shadow: 0 0 20px rgba(125, 0, 255, 0.1);
+}
+
+.terminal-glow {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.flicker-animation {
+  animation: flicker 2s infinite;
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(125, 0, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(125, 0, 255, 0.03) 1px, transparent 1px);
+  animation: grid-pulse 4s ease-in-out infinite;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateX(60deg) translateZ(-100px);
+  pointer-events: none;
+}
+
+.hero-circuit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+    circle at 50% 50%,
+    rgba(125, 0, 255, 0.05) 0%,
+    transparent 50%
+  );
+  animation: circuit-fade 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hero-scan {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(125, 0, 255, 0.2),
+    rgba(0, 191, 255, 0.2),
+    transparent
+  );
+  box-shadow: 0 0 20px rgba(125, 0, 255, 0.2);
+  animation: scan 3s linear infinite;
+  pointer-events: none;
+}
+
+.parallax-container {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.parallax-element {
+  transform: translateZ(50px);
+  transition: transform 0.3s ease-out;
+}
+
+.hex-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l25.98 15v30L30 60 4.02 45V15z' fill-opacity='0.05' fill='%237D00FF'/%3E%3C/svg%3E");
+  background-size: 60px 60px;
+  animation: hex-float 20s linear infinite;
+}
+
+.matrix-rain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.matrix-column {
+  position: absolute;
+  top: -100%;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(125, 0, 255, 0.3) 75%,
+    transparent 100%
+  );
+  animation: matrix-fall 3s infinite;
+}
+
+@keyframes matrix-fall {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes hex-float {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 60px 60px;
+  }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.95; }
+}
+
+@keyframes grid-pulse {
+  0%, 100% { opacity: 0.03; }
+  50% { opacity: 0.06; }
+}
+
+@keyframes circuit-fade {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(1.1); }
+}
+
+@keyframes scan {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100vh); }
+}
+
+.matrix-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.05;
+  z-index: -1;
+}
+
+/* Enhanced Button Styles */
+.button-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.button-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(125, 0, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.button-glow:hover::before {
+  left: 100%;
+}
+
+/* Interactive Elements Enhancement */
+.interactive-hover {
+  transition: all 0.3s ease;
+}
+
+.interactive-hover:hover {
+  color: hsl(var(--accent-glow));
+  text-shadow: 0 0 8px hsla(var(--accent-glow), 0.5);
+}
+
+.team-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.team-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    transparent,
+    rgba(125, 0, 255, 0.1),
+    transparent 30%
+  );
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
